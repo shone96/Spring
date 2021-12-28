@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans   
+	       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+		<bean id="downloadController" class="madvirus.spring.controller.DownloadController" />	
+
+		<!-- download를 위해 구현한 커스텀 뷰 Class를 사용하기 위한 설정 -->
+		<bean id="viewResolver"	class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+		<bean id="download" class="madvirus.spring.view.DownloadView" />
+		
+		<bean id="pageRanksController" class="madvirus.spring.controller.PageRanksController" />
+		
+		<bean id="pageRanks" class="madvirus.spring.view.PageRanksView" />
+		
+		<bean id="pageReportController" class="madvirus.spring.controller.PageReportController" />
+		
+		<bean id="pageReport" class="madvirus.spring.view.PageReportView" />
+		
+		<bean id="pageJsonReport" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+		
+		<bean id="pageXmlReport" class="org.springframework.web.servlet.view.xml.MarshallingView">
+			<property name="marshaller" ref="marshaller"></property>
+			<property name="modelKey" value="report"></property>
+		</bean>
+		
+		<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+			<property name="classesToBeBound">
+				<list>
+					<value>madvirus.spring.controller.PageRankReport</value>
+				</list>
+			</property>			
+		</bean>
+		
+</beans>

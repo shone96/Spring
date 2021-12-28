@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+	<!-- TilesConfigurer 빈 객체는 definitions 속성을 이용해서 Tiles 설정 파일 목록을 전달받는다. -->
+	<definition name="base_layout" template="/WEB-INF/viewtiles2/template/layout.jsp" preparer="menuPreparer"><!-- preparer는 ViewPreparer로 SPRING 빈을 사용하기 위한 속성 -->		
+	<put-attribute name="header" value="/WEB-INF/viewtiles2/template/header.jsp"/>
+	<put-attribute name="footer" value="/WEB-INF/viewtiles2/template/footer.jsp"/>
+	</definition>
+	
+	<!-- LoginController 클래스에서 form메소드 리턴값이 "loginForm" 으로 name속성 값이 일치하는 <definition> 태그의 정보를 사용한다.
+		base_layout 상속받아 layout.jsp를 레이아웃 템플릿으로 사용하고, 헤더와 푸터에 각각 header.jsp와 footer.jsp 삽입하고 body에는 loginForm.jsp를 사용하게된다.	-->
+	<definition name="loginForm" extends="base_layout">
+		<put-attribute name="title" value="로그인폼"/>
+		<put-attribute name="body" value="/WEB-INF/viewtiles2/loginForm.jsp"/>
+	</definition>
+	
+	<definition name="loginSuccess" extends="base_layout">
+		<put-attribute name="title" value="로그인 성공"/>
+		<put-attribute name="body" value="/WEB-INF/viewtiles2/loginSuccess.jsp"/>
+	</definition>
+	
+	<definition name="registMemberForm" extends="base_layout">
+		<put-attribute name="title" value="회원 가입"/>
+		<put-attribute name="body" value="/WEB-INF/viewtiles2/registMemberForm.jsp"/>
+	</definition>
+	<definition name="registMember" extends="base_layout">
+		<put-attribute name="title" value="회원 가입 완료"/>
+		<put-attribute name="body" value="/WEB-INF/viewtiles2/registMember.jsp"/>
+	</definition>
+</tiles-definitions>

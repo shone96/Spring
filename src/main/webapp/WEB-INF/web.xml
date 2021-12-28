@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://JAVA.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>SpringView</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+  	<param-name>defaultHtmlEscape</param-name>
+  	<param-value>false</param-value>
+  </context-param>
+  
+  <servlet>
+	<servlet-name>dispatcherInternal</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcherInternal</servlet-name>
+  	<url-pattern>/jsp/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>dispatcherTiles2</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcherTiles2</servlet-name>
+  	<url-pattern>/tiles2/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+	<servlet-name>dispatcherNonHtml</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>dispatcherNonHtml</servlet-name>
+  	<url-pattern>/download/*</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>EUC-KR</param-value>
+  	</init-param>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 웹 브라우저에서 PUT과 DELETE 방식을 이용하기위한 추가 -->
+  <filter>
+  	<filter-name>httpMethodFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  	
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>httpMethodFilter</filter-name>
+  	<servlet-name>dispatcherInternal</servlet-name>
+  </filter-mapping>
+</web-app>
